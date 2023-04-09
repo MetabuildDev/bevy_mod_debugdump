@@ -11,13 +11,13 @@ pub mod schedule_graph;
 #[track_caller]
 pub fn schedule_graph_dot(
     app: &mut App,
-    label: impl ScheduleLabel,
+    label: &dyn ScheduleLabel,
     settings: &schedule_graph::Settings,
 ) -> String {
     app.world
         .resource_scope::<Schedules, _>(|world, mut schedules| {
             let schedule = schedules
-                .get_mut(&label)
+                .get_mut(label)
                 .ok_or_else(|| format!("schedule with label {label:?} doesn't exist"))
                 .unwrap();
             schedule.graph_mut().initialize(world);
@@ -29,7 +29,7 @@ pub fn schedule_graph_dot(
 
 /// Prints the [`CoreSchedule::Main`] with default settings.
 pub fn print_main_schedule(app: &mut App) {
-    let dot = schedule_graph_dot(app, bevy_app::Main, &schedule_graph::Settings::default());
+    let dot = schedule_graph_dot(app, &bevy_app::Main, &schedule_graph::Settings::default());
     println!("{dot}");
 }
 
