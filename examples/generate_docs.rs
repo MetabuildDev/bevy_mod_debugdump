@@ -51,7 +51,7 @@ fn main() -> Result<(), std::io::Error> {
             }
 
             // filtered main, without mass event/asset systems
-            let main = schedules.get(&CoreSchedule::Main).unwrap();
+            let main = schedules.get(&Main).unwrap();
 
             let filter = |system: &dyn System<In = (), Out = ()>| {
                 let name = system.name();
@@ -89,7 +89,7 @@ fn main() -> Result<(), std::io::Error> {
             let bevy_crates: HashSet<_> = main
                 .graph()
                 .systems()
-                .filter_map(|(_, system, _, _)| Some(system.name().split_once("::")?.0.to_owned()))
+                .filter_map(|(_, system, _)| Some(system.name().split_once("::")?.0.to_owned()))
                 .collect();
 
             for bevy_crate in bevy_crates {

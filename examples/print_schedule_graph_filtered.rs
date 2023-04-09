@@ -13,6 +13,6 @@ fn main() {
 
     let settings =
         Settings::default().filter_name(|name| name.starts_with("print_schedule_graph_filtered"));
-    let dot = bevy_mod_debugdump::schedule_graph_dot(&mut app, CoreSchedule::Main, &settings);
+    let dot = bevy_mod_debugdump::schedule_graph_dot(&mut app, Main, &settings);
     println!("{dot}");
 }

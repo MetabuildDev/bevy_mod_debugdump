@@ -1,4 +1,4 @@
-use bevy_app::{App, CoreSchedule};
+use bevy_app::App;
 use bevy_ecs::schedule::{ScheduleLabel, Schedules};
 
 mod dot;
@@ -29,11 +29,7 @@ pub fn schedule_graph_dot(
 
 /// Prints the [`CoreSchedule::Main`] with default settings.
 pub fn print_main_schedule(app: &mut App) {
-    let dot = schedule_graph_dot(
-        app,
-        CoreSchedule::Main,
-        &schedule_graph::Settings::default(),
-    );
+    let dot = schedule_graph_dot(app, bevy_app::Main, &schedule_graph::Settings::default());
     println!("{dot}");
 }
 
