@@ -9,7 +9,7 @@ fn system_c() {}
 fn main() {
     let mut app = App::new();
     app.add_plugins(DefaultPlugins.build().disable::<LogPlugin>());
-    app.add_systems((system_a, system_b, system_c).chain());
+    app.add_systems(Update, (system_a, system_b, system_c).chain());
 
     let settings =
         Settings::default().filter_name(|name| name.starts_with("print_schedule_graph_filtered"));
